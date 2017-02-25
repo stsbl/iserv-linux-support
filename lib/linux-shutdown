@@ -1,0 +1,67 @@
+#!/usr/bin/perl -CSDAL
+
+use warnings;
+use strict;
+use IServ::DB;
+use Time::HiRes qw(gettimeofday tv_interval);
+
+sub print_time($$)
+{
+  my ($mod, $time) = @_;
+  printf "$mod: %.0fms\n", tv_interval($time) * 1000;
+}
+
+# schedule linux shutdown
+{
+  my %cron;
+  my $moduletime = [gettimeofday];
+
+  # build a hash
+  # { "timespec" => [ip1, ip2, ip3, ...], ... }
+  for (@{ DBH->selectall_arrayref("SELECT IP, Shutdown ".
+    "FROM hosts WHERE Shutdown IS NOT NULL ORDER BY IP") or die $! })
+  {
+    my ($ip, $time) = @$_;
+    if ($time =~ /^((\d+):(\d+)):.*/)
+    {
+      push @{$cron{$1}}, $ip;
+    }
+  }
+
+  # write the crontab
+  open my $fh, ">", "/var/lib/iserv/config/cron.linux.shutdown" or
+      warn "Cannot write to /var/lib/iserv/config/cron.linux.shutdown: $!";
+  my $cron_line = sub {
+    my ($h, $m) = split /:/, $_[0];
+    return "$m $h * * * root /usr/lib/iserv/host_linux_shutdown";
+  };
+  # /etc/cron.d/* files have a line length limit of 1000 characters, so we need
+  # to ensure that we only print up to 50 IPs at a time.
+  for my $time (sort keys %cron)
+  {
+    my @ips = @{$cron{$time}};
+
+    # start the first crontab line for this timespec
+    print $fh $cron_line->($time);
+
+    # print IPs
+    for my $i (0..$#ips)
+    {
+      if ($i > 0 and $i % 50 == 0)
+      {
+        # force a new line in the crontab after 50 IPs
+        print $fh "\n";
+        print $fh $cron_line->($time);
+      }
+      # print the current IP
+      print $fh " ", $ips[$i];
+    }
+    # print a double linebreak before the next timespec starts
+    print $fh "\n\n";
+  }
+  close $fh;
+
+  utime "/etc/crontab"; # touch cfg to reload cron
+  print_time("update linux shutdown schedule", $moduletime);
+}
+

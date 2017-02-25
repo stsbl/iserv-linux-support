@@ -1,0 +1,2 @@
+Link /var/lib/iserv/config/cron.linux.shutdown /etc/cron.d/iserv-linux-shutdown
+

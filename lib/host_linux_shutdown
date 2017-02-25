@@ -1,0 +1,29 @@
+#!/usr/bin/perl -CSDAL
+
+use warnings;
+use strict;
+use IPC::Run;
+use IServ::SSH;
+use POSIX qw(strftime);
+
+# determine online IPs; dead IPs have long timeouts
+my @ips_online;
+IPC::Run::run ["nmap", "-n", "-sP", "-oG", "-", "--", @ARGV],
+    ">", IPC::Run::new_chunker("\n"),
+    sub
+    {
+      local $_ = shift;
+      push @ips_online, $1 if /^Host:\s+([\d\.]+)\s+\(\)\s+Status:\s+Up.*$/i;
+    };
+
+for my $ip (@ips_online)
+{
+  # Calculate shutdown time, because the shutdown implementations of the linux distributions are may different
+  my $unix_time = time;
+  my $shutdown_time = $unix_time + 10 * 60;   # ten minutes after current time
+  my @local_shutdown_time = localtime $shutdown_time;
+  my $time_string = strftime "%H:%M", @local_shutdown_time;
+
+  () = IServ::SSH::ssh_run $ip, 'shutdown', '-P', $time_string, "Scheduled shutdown";
+}
+

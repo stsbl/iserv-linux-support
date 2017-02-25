@@ -1,0 +1,17 @@
+Source: stsbl-iserv-linux-support
+Section: misc
+Priority: extra
+Maintainer: Stadtteilschule Blankenese <repository@stsbl.de>
+Build-Depends: debhelper (>= 9)
+Standards-Version: 3.9.5
+
+Package: stsbl-iserv-linux-support
+Architecture: all
+Depends: iserv-portal
+Description: Erweiterter Linux-Support für IServ (EXPERIMENTELL)
+ Fügt Unterstützung für Linux-Clients durch IServ-Funktionen hinzu, die bisher für diese nicht verfügbar sind.
+ .
+ Momentan sind dies:
+ .
+ - Geplantes Herunterfahren zu der Uhrzeit, die in der Rechnerverwaltung angegeben ist.
+Tag: suite::iserv:portal, role::plugin, implemented-in::perl, status::highlighted, status::experimental
