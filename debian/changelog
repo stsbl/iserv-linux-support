@@ -1,3 +1,10 @@
+stsbl-iserv-linux-support (17.02.25-3) experimental; urgency=medium
+
+  [ Felix Jacobi ]
+  * Fixed shutdown timer.
+
+ -- Stadtteilschule Blankenese <repository@stsbl.de>  Sat, 25 Feb 2017 18:05:42 +0100
+
 stsbl-iserv-linux-support (17.02.25-2) experimental; urgency=medium
 
   [ Felix Jacobi ]
