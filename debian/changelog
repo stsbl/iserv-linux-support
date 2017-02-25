@@ -1,3 +1,10 @@
+stsbl-iserv-linux-support (17.02.25-2) experimental; urgency=medium
+
+  [ Felix Jacobi ]
+  * Moved newhosts script to correct location.
+
+ -- Stadtteilschule Blankenese <repository@stsbl.de>  Sat, 25 Feb 2017 17:31:09 +0100
+
 stsbl-iserv-linux-support (17.02.25-1) experimental; urgency=low
 
   * Initial release.
