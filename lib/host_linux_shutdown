@@ -24,6 +24,6 @@ for my $ip (@ips_online)
   my @local_shutdown_time = localtime $shutdown_time;
   my $time_string = strftime "%H:%M", @local_shutdown_time;
 
-  () = IServ::SSH::ssh_run $ip, 'shutdown', '-P', $time_string, "Scheduled shutdown";
+  () = IServ::SSH::ssh_run $ip, "shutdown -P $time_string";
 }
 
