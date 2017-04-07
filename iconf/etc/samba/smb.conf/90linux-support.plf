@@ -1,0 +1,9 @@
+#!/usr/bin/perl -n
+print;
+if (my ($share) = /^\[(.+)\]/)
+{
+  next if not lc $share eq "linux_print";
+  print "  preexec = /usr/lib/iserv/samba_print_directory %u\n";
+  print "\n";
+}
+

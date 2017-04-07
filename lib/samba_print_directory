@@ -1,0 +1,13 @@
+#!/usr/bin/perl -CSDAL
+
+(print STDERR "Usage: samba_print_directory [act]\n" and exit 1) if @ARGV < 1;
+
+my ($act) = @ARGV;
+my (undef, undef, $uid, $gid, undef, undef, undef, $home) = getpwnam $act or die "getpwnam for $act failed: $!";
+my $dir = "$home/Print";
+
+die "UID too low!" if $uid < 500;
+
+-d $dir or mkdir $dir or die "Couldn't make directory $dir: $!";
+chown $uid, $gid, $dir or die "Couldn't chown directory $dir: $!";
+chmod 02770, $dir or die "Couldn't chmod directory $dir: $!";
