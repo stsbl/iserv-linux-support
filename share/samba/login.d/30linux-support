@@ -1,0 +1,24 @@
+#!/usr/bin/perl -CSDAL
+
+use warnings;
+use strict;
+use IServ::SSH;
+
+my ($act, $ip) = @ARGV;
+
+undef %ENV;
+$ENV{PATH}= "/usr/sbin:/usr/bin:/sbin:/bin";
+
+if (-f "/var/lib/dpkg/info/iserv-print.list")
+{
+  #fork and exit;
+  #open STDIN, "/dev/null" or die $!;
+  #open STDOUT, ">/dev/null" or die $!;
+  #open STDERR, ">/dev/null" or die $!;
+ 
+  # IServ::SSH cannot handle this :(
+  system "bash", "-c", "ssh_root -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null $ip < /usr/share/iserv/print/linux/setup.sh";
+
+  # run printer configuration
+  IServ::SSH::ssh_run $ip, "/usr/lib/iserv/setup_printer $act";
+}

@@ -11,7 +11,7 @@ lib/*		usr/lib/iserv
 #priv/*		usr/share/iserv/priv
 #roles/*		usr/share/iserv/roles
 #sbin/*		usr/sbin
-#share/*		usr/share/iserv
+share/*		usr/share/iserv
 #src/*		usr/share/iserv/src
 #srv/*		srv
 #install/*	srv/deploy/install
