@@ -1,0 +1,56 @@
+#!/usr/bin/perl -CSDAL
+
+use warnings;
+use strict;
+use utf8;
+use Cpanel::JSON::XS qw/encode_json/;
+use IServ::IO;
+
+my %cupsprinters;
+
+open(IN, 'LC_ALL=C lpstat -l -p|');
+while(<IN>) 
+{
+  my $printer = { 'name'=>'', 'longname'=>'', 'costpaper'=>'', 'costink'=>'', 'restrictroom'=>'', 'location'=>'' }  if /^\w/;
+  if (/^printer (.+?) /) {
+    next if $1 eq 'iserv';
+    $printer->{name} = $1;
+  } elsif (/^\s+Description:\s*(.*?) (?:,\s*(\d+)\s*)? (?:\+\s*(\d+)\s*)? (\#restrictroom)?$/ix) {
+    $printer->{longname} = $1 ? $1 : '';
+    $printer->{costpaper} = $2 ? $2 : 0;
+    $printer->{costink} = $3 ? $3 : 0;
+    $printer->{restrictroom} = defined $4;
+  } elsif (/^\s+Location: (.*)$/) {
+    $printer->{location} = $1;
+  }
+  next unless $printer->{name};
+  $cupsprinters{$printer->{name}} = $printer;
+}
+close IN;
+
+my @printer_array;
+
+foreach my $printer (keys %cupsprinters) 
+{
+  push @printer_array, $printer;
+}
+
+my $data = {
+  'printers' => @printer_array
+};
+
+my $json = encode_json $data;
+my $current_content = "";
+my $file = "/etc/samba/netlogon/Printer Configuration/printers.json";
+
+if (-f $file)
+{
+  $current_content = getfile $file;
+}
+
+if (not $json eq $current_content)
+{
+  putfile $file, $json or die "Cannot write file $file: $!";
+}
+
+chmod 00664, $file or die "Cannot chmod file $file: $!";
