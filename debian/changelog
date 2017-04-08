@@ -1,3 +1,13 @@
+stsbl-iserv-linux-support (17.04.08-1) experimental; urgency=medium
+ 
+  [ Felix Jacobi ]
+  * Added SCP.pm.
+  * Improved server side print login script:
+    - added on-demand generation of printer list.
+    - copy setup script via scp to client and execute it locally.
+
+ -- Stadtteilschule Blankenese <repository@stsbl.de>  Sat, 08 Apr 2017 06:08:36 +0200
+
 stsbl-iserv-linux-support (17.04.08-0) experimental; urgency=medium
 
   [ Felix Jacobi ]
