@@ -1,3 +1,18 @@
+stsbl-iserv-linux-support (17.04.08-0) experimental; urgency=medium
+
+  [ Felix Jacobi ]
+  * Added support for sharing printers via ipp if direct printing is enabled (required for direct printing from Linux).
+  * Added samba hook to create print directory on demand if it is accessed via the share linux_print.
+  * Added server side support for deploying stsbl-iserv-client-print to Linux clients.
+  * Improved security of samba_print_directory.
+  * Whitelist repository.stsbl.de and .archive.ubuntu.com in nat and squid.
+  * Updated package description.
+  * Added scp_root.
+
+  iserv: Das direkte Drucken wird über dieses Modul nun auch über Linux unterstützt. In die IServ-Domäne eingebundene Linux-Clients werden automatisch richtig konfiguriert und die Drucker dort beim Login automatisch eingebunden.
+
+ -- Stadtteilschule Blankenese <repository@stsbl.de>  Sat, 08 Apr 2017 02:41:50 +0200
+
 stsbl-iserv-linux-support (17.02.25-3) experimental; urgency=medium
 
   [ Felix Jacobi ]
