@@ -14,4 +14,6 @@ Description: Erweiterter Linux-Support für IServ (EXPERIMENTELL)
  Momentan sind dies:
  .
  - Geplantes Herunterfahren zu der Uhrzeit, die in der Rechnerverwaltung angegeben ist.
+ .
+ - Unterstützung für direktes Drucken. Auf dem Client wird dazu beim Login eines Domänenbenutzers automatisch ein Programm dafür installiert, welches bei jedem Login läuft und die Drucker konfiguriert, weitere Konfigurationsschritte sind nicht erforderlich.
 Tag: suite::iserv:portal, role::plugin, implemented-in::perl, status::highlighted, status::experimental
