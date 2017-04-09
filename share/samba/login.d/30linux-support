@@ -2,10 +2,12 @@
 
 use warnings;
 use strict;
+use IPC::Run;
 use IServ::SSH;
 use Stsbl::IServ::SCP; 
 
 my ($act, $ip) = @ARGV;
+my $ip_online = 0;
 
 undef %ENV;
 $ENV{PATH}= "/usr/sbin:/usr/bin:/sbin:/bin";
@@ -20,10 +22,23 @@ if (-f "/var/lib/dpkg/info/iserv-print.list")
   
   # re-generate printer list
   system "/usr/lib/iserv/print_generate_list";
+ 
+  IPC::Run::run ["nmap", "-n", "-p22", "-oG", "-", "--", $ip],
+    ">", IPC::Run::new_chunker("\n"),
+    sub {
+      local $_ = shift;
+      if (/^Host:\s+([\d\.]+)\s+\(\)\s+Ports:\s+22\/open\/tcp\/\/ssh\/\/+/i) 
+      {
+	$ip_online = 1;
+      }
+  };
 
-  # copy printer script
-  Stsbl::IServ::SCP::scp $ip, "/usr/share/iserv/print/linux/setup.sh", ":/tmp/printer-setup.sh";
+  if ($ip_online)
+  {
+    # copy printer script
+    Stsbl::IServ::SCP::scp $ip, "/usr/share/iserv/print/linux/setup.sh", ":/tmp/printer-setup.sh";
 
-  # run printer script remotely
-  IServ::SSH::ssh_run $ip, 'bash -c "/tmp/printer-setup.sh > /tmp/printer-setup.log"';
+    # run printer script remotely
+    IServ::SSH::ssh_run $ip, 'bash -c "/tmp/printer-setup.sh > /tmp/printer-setup.log"';
+  }
 }
