@@ -13,6 +13,10 @@ then
   aptitude -y -q -o Dpkg::Options::=--force-confmiss -o Dpkg::Options::=--force-confold install apt-transport-https
 fi
 
+# fix dpkg if necessary
+
+dpkg --configure -a
+
 # add stsbl repository
 
 if [ ! -f "/etc/apt/sources.list.d/stsbl.list" ]
