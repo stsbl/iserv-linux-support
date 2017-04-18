@@ -1,3 +1,18 @@
+stsbl-iserv-linux-support (17.04.18-0) experimental; urgency=medium
+
+  [ Felix Jacobi ]
+  * login.d/30linux-support: Only execute ssh commands if ssh port is opened.
+    This should prevent dead procesess which are started by the login script
+    and tries a long time to reach a non-existing ssh server.
+  * Fixed generation of print_generate_list.
+  * Added auto_yes and verbose to SCP options.
+  * Call 'dpkg --configure -a' in print client setup script to make sure 
+    that the client will also installed, if a previous dpkg process 
+    was interrupted.
+  * Depend on fixed rebuilt version of libnet-scp-expect-perl.
+
+ -- Stadtteilschule Blankenese <repository@stsbl.de>  Tue, 18 Apr 2017 21:12:00 +0200
+
 stsbl-iserv-linux-support (17.04.08-1) experimental; urgency=medium
  
   [ Felix Jacobi ]
