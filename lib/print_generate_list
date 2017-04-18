@@ -6,11 +6,10 @@ use utf8;
 use Cpanel::JSON::XS qw/encode_json/;
 use IServ::IO;
 
-my %cupsprinters;
+my $cupsprinters = {};
 
 open(IN, 'LC_ALL=C lpstat -l -p|');
-while(<IN>) 
-{
+while(<IN>) {
   my $printer = { 'name'=>'', 'longname'=>'', 'costpaper'=>'', 'costink'=>'', 'restrictroom'=>'', 'location'=>'' }  if /^\w/;
   if (/^printer (.+?) /) {
     next if $1 eq 'iserv';
@@ -24,22 +23,16 @@ while(<IN>)
     $printer->{location} = $1;
   }
   next unless $printer->{name};
-  $cupsprinters{$printer->{name}} = $printer;
+  $cupsprinters->{$printer->{name}} = $printer;
 }
 close IN;
 
-my @printer_array;
 
-foreach my $printer (keys %cupsprinters) 
-{
-  push @printer_array, $printer;
-}
+my @printer_array = keys %$cupsprinters;
+my %data;
+$data{'printers'} = \@printer_array;
 
-my $data = {
-  'printers' => @printer_array
-};
-
-my $json = encode_json $data;
+my $json = encode_json \%data;
 my $current_content = "";
 my $file = "/etc/samba/netlogon/Printer Configuration/printers.json";
 
