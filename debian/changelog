@@ -1,3 +1,10 @@
+stsbl-iserv-linux-support (17.04.18-1) experimental; urgency=medium
+
+  [ Felix Jacobi ]
+  * Fixed dependency.
+
+ -- Stadtteilschule Blankenese <repository@stsbl.de>  Tue, 18 Apr 2017 21:19:15 +0200
+
 stsbl-iserv-linux-support (17.04.18-0) experimental; urgency=medium
 
   [ Felix Jacobi ]
