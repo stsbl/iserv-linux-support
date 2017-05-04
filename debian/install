@@ -1,4 +1,4 @@
-usr/*		usr
+#usr/*		usr
 sbin/*		usr/sbin
 #bin/*		usr/bin
 #bundle/*	usr/share/iserv/src/IServ
