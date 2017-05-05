@@ -1,8 +1,9 @@
-stsbl-iserv-linux-support (17.05.05-1) experimental; urgency=medium
+stsbl-iserv-linux-support (17.05.05-0) experimental; urgency=medium
 
-  * UNRELEASED
+  [ Felix Jacobi ]
+  * Moved SCP.pm and deps to stsbl-iserv-perl-lib.
 
- -- Stadtteilschule Blankenese <repository@stsbl.de>  Fri, 05 May 2017 02:50:50 +0200
+ -- Stadtteilschule Blankenese <repository@stsbl.de>  Fri, 05 May 2017 02:51:09 +0200
 
 stsbl-iserv-linux-support (17.04.24-0) experimental; urgency=medium
 
