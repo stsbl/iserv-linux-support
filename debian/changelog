@@ -1,4 +1,4 @@
-stsbl-iserv-linux--support (17.06.17-0) experimental; urgency=medium
+stsbl-iserv-linux-support (17.06.17-0) experimental; urgency=medium
 
   [ Felix Jacobi ]
   * Updated build deps and rules.
