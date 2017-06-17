@@ -7,7 +7,7 @@ Standards-Version: 3.9.5
 
 Package: stsbl-iserv-linux-support
 Architecture: all
-Depends: iserv-portal, libcpanel-json-xs-perl, stsbl-iserv-perl-lib
+Depends: iserv-portal, iserv-computer, libcpanel-json-xs-perl, stsbl-iserv-perl-lib
 Description: Erweiterter Linux-Support für IServ (EXPERIMENTELL)
  Fügt Unterstützung für Linux-Clients durch IServ-Funktionen hinzu, die bisher für diese nicht verfügbar sind.
  .
