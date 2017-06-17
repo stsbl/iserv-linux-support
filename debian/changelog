@@ -1,3 +1,11 @@
+stsbl-iserv-linux--support (17.06.17-0) experimental; urgency=medium
+
+  [ Felix Jacobi ]
+  * Updated build deps and rules.
+  * samba_print_directory: Fixed tainting.
+
+ -- Stadtteilschule Blankenese <repository@stsbl.de>  Sat, 17 Jun 2017 16:11:49 +0200
+
 stsbl-iserv-linux-support (17.05.05-0) experimental; urgency=medium
 
   [ Felix Jacobi ]
