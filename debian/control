@@ -11,7 +11,8 @@ Depends: iserv-portal,
   iserv-computer,
   iserv-server-ferm,
   libcpanel-json-xs-perl,
-  stsbl-iserv-perl-lib
+  stsbl-iserv-perl-lib,
+Replaces: stsbl-iserv-file-distribution (<< 17.11.11),
 Description: Erweiterter Linux-Support für IServ (EXPERIMENTELL)
  Fügt Unterstützung für Linux-Clients durch IServ-Funktionen hinzu, die
  bisher für diese nicht verfügbar sind.
