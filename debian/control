@@ -2,17 +2,22 @@ Source: stsbl-iserv-linux-support
 Section: misc
 Priority: extra
 Maintainer: Stadtteilschule Blankenese <repository@stsbl.de>
-Build-Depends: debhelper (>= 10), iserv3-dev
-Standards-Version: 3.9.5
+Build-Depends: debhelper (>= 10)
+Build-Depends-Indep: iserv3-dev
+Standards-Version: 4.1.3.0
 
 Package: stsbl-iserv-linux-support
 Architecture: all
-Depends: iserv-portal,
+Depends: ${misc:Depends},
+  ${perl:Depends},
   iserv-computer,
+  iserv-portal,
   iserv-server-ferm,
   libcpanel-json-xs-perl,
   stsbl-iserv-perl-lib,
-Replaces: stsbl-iserv-file-distribution (<< 17.11.11),
+Replaces:
+  stsbl-iserv-file-distribution (<< 17.11.11),
+Xb-Private-IServ-Revision: ${iserv:Revision}
 Description: Erweiterter Linux-Support für IServ (EXPERIMENTELL)
  Fügt Unterstützung für Linux-Clients durch IServ-Funktionen hinzu, die
  bisher für diese nicht verfügbar sind.
