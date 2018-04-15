@@ -10,9 +10,7 @@ Package: stsbl-iserv-linux-support
 Architecture: all
 Depends: ${misc:Depends},
   ${perl:Depends},
-  iserv-computer,
-  iserv-portal,
-  iserv-server-ferm,
+  iserv-portal (>= 17.09.25-0),
   libcpanel-json-xs-perl,
   stsbl-iserv-perl-lib,
 Replaces:
