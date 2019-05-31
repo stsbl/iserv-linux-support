@@ -11,6 +11,7 @@ Architecture: all
 Depends: ${misc:Depends},
   ${perl:Depends},
   iserv-portal (>= 17.09.25-0),
+  iserv-server-ferm (>= 19.05.14),
   libcpanel-json-xs-perl,
   stsbl-iserv-perl-lib,
 Replaces:

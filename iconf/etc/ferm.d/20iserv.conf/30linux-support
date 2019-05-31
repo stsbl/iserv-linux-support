@@ -1,0 +1,27 @@
+domain (ip) {
+  table filter {
+    chain forward_white {
+      proto tcp dport (http https) mod set set iserv-linux-support-white dst ACCEPT;
+    }
+  }
+  table nat {
+    chain prerouting_first {
+      proto tcp dport (http https) mod set set iserv-linux-support-white dst ACCEPT;
+
+    }
+  }
+}
+domain (ip6) {
+  table filter {
+    chain forward_white {
+      proto tcp dport (http https) mod set set iserv-linux-support-white6 dst ACCEPT;
+    }
+  }
+  table nat {
+    chain prerouting_first {
+      proto tcp dport (http https) mod set set iserv-linux-support-white6 dst ACCEPT;
+
+    }
+  }
+}
+

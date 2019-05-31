@@ -15,13 +15,13 @@ $ENV{PATH}= "/usr/sbin:/usr/bin:/sbin:/bin";
 # check for installed print module
 if (-f "/var/lib/dpkg/info/iserv-print.list")
 {
+  # re-generate printer list
+  system "/usr/lib/iserv/print_generate_list";
+
   fork and exit;
   open STDIN, "/dev/null" or die $!;
   open STDOUT, ">/dev/null" or die $!;
   open STDERR, ">/dev/null" or die $!;
-  
-  # re-generate printer list
-  system "/usr/lib/iserv/print_generate_list";
  
   IPC::Run::run ["nmap", "-n", "-p22", "-oG", "-", "--", $ip],
     ">", IPC::Run::new_chunker("\n"),

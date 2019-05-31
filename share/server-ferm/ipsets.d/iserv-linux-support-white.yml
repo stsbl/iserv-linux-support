@@ -1,0 +1,8 @@
+Files:
+  - /usr/share/iserv/security/iplist/de.archive.ubuntu.com
+  - /usr/share/iserv/security/iplist/repository.stsbl.de
+  - /usr/share/iserv/security/iplist/security.ubuntu.com
+Directories: ~
+Type: "hash:ip"
+ExecFetch: ~
+
