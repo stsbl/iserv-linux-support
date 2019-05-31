@@ -1,3 +1,10 @@
+stsbl-iserv-linux-support (19.05.31-1) experimental; urgency=medium
+
+  * Updated build rules
+  * Added support for new chkipsets
+
+ -- Felix Jacobi <Felix@jacobi-hamburg.net>  Fri, 31 May 2019 21:10:31 +0200
+
 stsbl-iserv-linux-support (18.04.15-2) experimental; urgency=medium
 
   * Removed print handling for linux clients (now handled by iserv-print itself)
