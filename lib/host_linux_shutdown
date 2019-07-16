@@ -2,19 +2,23 @@
 
 use warnings;
 use strict;
-use IPC::Run;
+use IServ::Host::Detect;
 use IServ::SSH;
 use POSIX qw(strftime);
 
-# determine online IPs; dead IPs have long timeouts
+/^[\d.]+$/ or die "ip invalid\n" for @ARGV;
+
+my $m_unix = qr/^Unix-like/;
 my @ips_online;
-IPC::Run::run ["nmap", "-n", "-sP", "-oG", "-", "--", @ARGV],
-    ">", IPC::Run::new_chunker("\n"),
-    sub
-    {
-      local $_ = shift;
-      push @ips_online, $1 if /^Host:\s+([\d\.]+)\s+\(\)\s+Status:\s+Up.*$/i;
-    };
+my @tests = ("sshd");
+
+# determine online IPs; dead IPs have long timeouts
+my $result = IServ::Host::Detect::Analyze(\@ARGV, \@tests, scalar @ARGV);
+
+for (sort keys %$result)
+{
+  push @ips_online, $_ if $result->{$_}{os} =~ $m_unix;
+}
 
 for my $ip (@ips_online)
 {

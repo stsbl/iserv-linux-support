@@ -2,12 +2,12 @@
 
 use warnings;
 use strict;
-use IPC::Run;
+use IServ::Host::Detect;
 use IServ::SSH;
 use Stsbl::IServ::SCP; 
 
 my ($act, $ip) = @ARGV;
-my $ip_online = 0;
+my $m_unix = qr/^Unix-like/;
 
 undef %ENV;
 $ENV{PATH}= "/usr/sbin:/usr/bin:/sbin:/bin";
@@ -23,17 +23,11 @@ if (-f "/var/lib/dpkg/info/iserv-print.list")
   open STDOUT, ">/dev/null" or die $!;
   open STDERR, ">/dev/null" or die $!;
  
-  IPC::Run::run ["nmap", "-n", "-p22", "-oG", "-", "--", $ip],
-    ">", IPC::Run::new_chunker("\n"),
-    sub {
-      local $_ = shift;
-      if (/^Host:\s+([\d\.]+)\s+\(\)\s+Ports:\s+22\/open\/tcp\/\/ssh\/\/+/i) 
-      {
-	$ip_online = 1;
-      }
-  };
+  my @tests = ("sshd");
+  # determine online IPs; dead IPs have long timeouts
+  my $result = IServ::Host::Detect::Analyze([$ip], \@tests, 1);
 
-  if ($ip_online)
+  if ($result->{$ip}{os} =~ $m_unix)
   {
     # copy printer script
     Stsbl::IServ::SCP::scp $ip, "/usr/share/iserv/print/linux/setup.sh", ":/tmp/printer-setup.sh";
