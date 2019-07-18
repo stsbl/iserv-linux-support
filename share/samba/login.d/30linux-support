@@ -27,7 +27,7 @@ if (-f "/var/lib/dpkg/info/iserv-print.list")
   # determine online IPs; dead IPs have long timeouts
   my $result = IServ::Host::Detect::Analyze([$ip], \@tests, 1);
 
-  if ($result->{$ip}{os} =~ $m_unix)
+  if (defined $result->{$ip}{os} and $result->{$ip}{os} =~ $m_unix)
   {
     # copy printer script
     Stsbl::IServ::SCP::scp $ip, "/usr/share/iserv/print/linux/setup.sh", ":/tmp/printer-setup.sh";
