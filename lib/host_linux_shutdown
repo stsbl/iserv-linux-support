@@ -17,7 +17,7 @@ my $result = IServ::Host::Detect::Analyze(\@ARGV, \@tests, scalar @ARGV);
 
 for (sort keys %$result)
 {
-  push @ips_online, $_ if defined $result->{$ip}{os} and
+  push @ips_online, $_ if defined $result->{$_}{os} and
       $result->{$_}{os} =~ $m_unix;
 }
 
