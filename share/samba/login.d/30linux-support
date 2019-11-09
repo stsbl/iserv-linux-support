@@ -29,6 +29,11 @@ if (-f "/var/lib/dpkg/info/iserv-print.list")
 
   if (defined $result->{$ip}{os} and $result->{$ip}{os} =~ $m_unix)
   {
+    # copy current keyrings and install them
+    Stsbl::IServ::SCP::scp $ip, "/usr/share/iserv/security/apt-keys/iserv.gpg", ":/tmp/iserv.gpg";
+    Stsbl::IServ::SCP::scp $ip, "/usr/share/iserv/security/apt-keys/stsbl.gpg", ":/tmp/stsbl.gpg";
+    IServ::SSH::ssh_run $ip, "apt-key add /tmp/iserv.gpg /tmp/stsbl.gpg";
+
     # copy printer script
     Stsbl::IServ::SCP::scp $ip, "/usr/share/iserv/print/linux/setup.sh", ":/tmp/printer-setup.sh";
 
