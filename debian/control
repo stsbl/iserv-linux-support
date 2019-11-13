@@ -15,7 +15,7 @@ Depends: ${misc:Depends},
   iserv-server-ferm (>= 19.05.14),
   libcpanel-json-xs-perl,
   stsbl-iserv-perl-lib,
-  stsbl-keyring,
+  stsbl-keyring-data,
 Replaces:
   stsbl-iserv-file-distribution (<< 17.11.11),
 Xb-Private-IServ-Revision: ${iserv:Revision}
