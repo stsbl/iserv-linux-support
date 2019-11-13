@@ -1,3 +1,11 @@
+stsbl-iserv-linux-support (19.11.13-1) testing; urgency=medium
+
+  * Replaced priority extra by optional
+  * Added dependency on iserv-keyring for required data files
+  * Depend on stsbl-keyring-data instead of stsbl-keyring
+
+ -- Felix Jacobi <Felix@jacobi-hamburg.net>  Wed, 13 Nov 2019 09:36:29 +0100
+
 stsbl-iserv-linux-support (19.11.09-1) stable; urgency=medium
 
   * host_linux_shutdown: Fixed typo
@@ -98,7 +106,7 @@ stsbl-iserv-linux-support (17.04.18-0) experimental; urgency=medium
  -- Stadtteilschule Blankenese <repository@stsbl.de>  Tue, 18 Apr 2017 21:12:00 +0200
 
 stsbl-iserv-linux-support (17.04.08-1) experimental; urgency=medium
- 
+
   [ Felix Jacobi ]
   * Added SCP.pm.
   * Improved server side print login script:
