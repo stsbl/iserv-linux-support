@@ -7,9 +7,8 @@ then
   cat << EOT
 # Allow direct access to all printers
 <Location /printers>
-  Order deny,allow
-$(netquery -p "  Allow from net/bits") 
-  Deny from all
+  AuthType Default
+  Require valid-user
 </Location>
 EOT
 fi
