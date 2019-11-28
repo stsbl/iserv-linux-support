@@ -1,3 +1,10 @@
+stsbl-iserv-linux-support (19.11.28-1) stable; urgency=medium
+
+  * CUPS: Updated configuration to enforce authentication on using
+    printers via IPP to avoid collision with group restrictions
+
+ -- Felix Jacobi <Felix@jacobi-hamburg.net>  Thu, 28 Nov 2019 07:51:37 +0100
+
 stsbl-iserv-linux-support (19.11.13-1) testing; urgency=medium
 
   * Replaced priority extra by optional
