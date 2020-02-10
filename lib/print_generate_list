@@ -4,7 +4,7 @@ use warnings;
 use strict;
 use utf8;
 use Cpanel::JSON::XS qw/encode_json/;
-use IServ::IO;
+use Path::Tiny;
 
 my $cupsprinters = {};
 
@@ -38,12 +38,12 @@ my $file = "/etc/samba/netlogon/Printer Configuration/printers.json";
 
 if (-f $file)
 {
-  $current_content = getfile $file;
+  $current_content = path($file)->slurp_utf8;
 }
 
 if (not $json eq $current_content)
 {
-  putfile $file, $json or die "Cannot write file $file: $!";
+  path($file)->spew_utf8($json) or die "Cannot write file $file: $!";
 }
 
 chmod 00664, $file or die "Cannot chmod file $file: $!";

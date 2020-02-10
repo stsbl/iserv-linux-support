@@ -14,6 +14,7 @@ Depends: ${misc:Depends},
   iserv-portal (>= 17.09.25-0),
   iserv-server-ferm (>= 19.05.14),
   libcpanel-json-xs-perl,
+  libpath-tiny-perl,
   stsbl-iserv-perl-lib,
   stsbl-keyring-data,
 Replaces:
