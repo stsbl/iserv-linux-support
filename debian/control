@@ -2,24 +2,22 @@ Source: stsbl-iserv-linux-support
 Section: misc
 Priority: optional
 Maintainer: Stadtteilschule Blankenese <repository@stsbl.de>
-Build-Depends: debhelper (>= 10)
-Build-Depends-Indep: iserv-buildtools
-Standards-Version: 4.4.1
+Build-Depends: debhelper-compat (= 13), dh-sequence-iserv, dh-sequence-stsbl
+Standards-Version: 4.5.0
 
 Package: stsbl-iserv-linux-support
 Architecture: all
-Depends: ${misc:Depends},
-  ${perl:Depends},
-  iserv-keyring,
-  iserv-portal (>= 17.09.25-0),
-  iserv-server-ferm (>= 19.05.14),
-  libcpanel-json-xs-perl,
-  libpath-tiny-perl,
-  stsbl-iserv-perl-lib,
-  stsbl-keyring-data,
-Replaces:
-  stsbl-iserv-file-distribution (<< 17.11.11),
-Xb-Private-IServ-Revision: ${iserv:Revision}
+Depends: iserv-keyring,
+         iserv-portal (>= 17.09.25-0),
+         iserv-server-ferm (>= 19.05.14),
+         libcpanel-json-xs-perl,
+         libpath-tiny-perl,
+         stsbl-iserv-perl-lib,
+         stsbl-keyring-data,
+         ${misc:Depends},
+         ${perl:Depends}
+Replaces: stsbl-iserv-file-distribution (<< 17.11.11)
+Xb-Private-Iserv-Revision: ${iserv:Revision}
 Description: Erweiterter Linux-Support für IServ (EXPERIMENTELL)
  Fügt Unterstützung für Linux-Clients durch IServ-Funktionen hinzu, die
  bisher für diese nicht verfügbar sind.
