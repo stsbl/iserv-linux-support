@@ -7,6 +7,8 @@ then
   cat << EOT
 # Allow direct access to all printers
 <Location /printers>
+  Satisfy Any
+  Allow from localhost
   AuthType Default
   Require valid-user
 </Location>
