@@ -1,3 +1,9 @@
+stsbl-iserv-linux-support (22.11.26.1) stable; urgency=medium
+
+  * IConf: Fixed shebangs
+
+ -- Felix Jacobi <Felix@jacobi-hamburg.net>  Sat, 26 Nov 2022 00:18:53 +0100
+
 stsbl-iserv-linux-support (22.09.13.1) stable; urgency=medium
 
   * Fixed compatibility with recent Samba update
